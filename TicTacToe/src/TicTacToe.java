@@ -67,10 +67,9 @@ public class TicTacToe {
                 resetGameBoard(gameBoard);
                 playerPositions.clear();
                 cpuPositions.clear();
+                System.out.println(result);
+                System.out.println("\n>>The game board has been reset!");
             }
-
-            System.out.println(result);
-            System.out.println("\n>>The game board has been reset!");
         }      
     }
 
