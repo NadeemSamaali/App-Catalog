@@ -15,6 +15,10 @@ public class TicTacToe {
     static ArrayList<Integer> playerPositions = new ArrayList<Integer>();
     static ArrayList<Integer> cpuPositions = new ArrayList<Integer>();
 
+    //Creating scoreboard
+    static int humanScore = 0;
+    static int cpuScore = 0;
+
     public static void main(String[] args){
         
         //creating the gameboard
@@ -61,15 +65,27 @@ public class TicTacToe {
             printGameboard(gameBoard);
             String result = checkWinner();
 
+            //Recording wins into the scoreboard and printing them
+            if(result == "\n>>Congratulations you won!")
+                humanScore += 1;
+            else if(result == "\n>>You lost! Try again.")
+                cpuScore += 1;
+            else if(result == "\n>>Tie"){
+                cpuPos += 1;
+                humanScore += 1;
+            }
 
             //Reseting the gameboard and the player/cpu position arrays when winning or loosing
             if(result != " "){
+                System.out.println(result);
+                System.out.println("\n##Scoreboard --- You : " + humanScore + " ; CPU : " + cpuScore);
                 resetGameBoard(gameBoard);
                 playerPositions.clear();
                 cpuPositions.clear();
-                System.out.println(result);
-                System.out.println("\n>>The game board has been reset!");
+                System.out.println("\n##The game board has been reset!");
             }
+
+            
         }      
     }
 
@@ -254,5 +270,4 @@ public class TicTacToe {
         gameBoard[4][4] = ' ';
     }
     
-
 }
