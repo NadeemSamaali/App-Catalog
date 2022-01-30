@@ -136,7 +136,7 @@ public class TicTacToe {
     }
 
     /**
-     * Method checking who won the game depeding on the numeral placements of the human player and the cpu
+     * Method checking who won the game depending on the numeral placements of the human player and the cpu
      * @return : return's who won the game depending on the winning contidions
      */
     public static String checkWinner()
