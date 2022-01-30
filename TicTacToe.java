@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * This program is a simple TicTacToe game against a computer player
  * @author Nadeem Imam Samaali
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class TicTacToe {
 
@@ -18,6 +18,8 @@ public class TicTacToe {
     //Creating scoreboard
     static int humanScore = 0;
     static int cpuScore = 0;
+
+    static boolean gameover = false;
 
     public static void main(String[] args){
         
@@ -33,7 +35,9 @@ public class TicTacToe {
 
         Scanner input = new Scanner(System.in);
 
-        while(true){
+        while(!gameover){
+    
+
             System.out.print("\n>>Enter you placement (1-9) :");
             int playerPos = input.nextInt();
             
@@ -62,8 +66,12 @@ public class TicTacToe {
             
             System.out.println("\n>>CPU has entered placement");
             placePiece(cpuPos, gameBoard, "cpu");
+            System.out.println(cpuPositions.size() + " " + playerPositions.size());
+
+
             printGameboard(gameBoard);
             String result = checkWinner();
+            System.out.println(result);
 
             //Recording wins into the scoreboard and printing them
             if(result == "\n>>Congratulations you won!")
@@ -77,7 +85,6 @@ public class TicTacToe {
 
             //Reseting the gameboard and the player/cpu position arrays when winning or loosing
             if(result != " "){
-                System.out.println(result);
                 System.out.println("\n##Scoreboard --- You : " + humanScore + " ; CPU : " + cpuScore);
                 resetGameBoard(gameBoard);
                 playerPositions.clear();
@@ -186,7 +193,7 @@ public class TicTacToe {
                 return "\n>>Congratulations you won!";
             } else if(cpuPositions.containsAll(l)){
                 return "\n>>You lost! Try again.";
-            } else if (cpuPositions.size() + playerPositions.size() == 9){
+            } else if (cpuPositions.size() + cpuPositions.size() == 9){
                 return "\n>>Tie";
             }}
 
