@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * This program is a simple TicTacToe game against a computer player
  * @author Nadeem Imam Samaali
- * @version 1.1.0
+ * @version 1.1.1
  */
 public class TicTacToe {
 
@@ -66,8 +66,6 @@ public class TicTacToe {
             
             System.out.println("\n>>CPU has entered placement");
             placePiece(cpuPos, gameBoard, "cpu");
-            System.out.println(cpuPositions.size() + " " + playerPositions.size());
-
 
             printGameboard(gameBoard);
             String result = checkWinner();
