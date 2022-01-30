@@ -86,7 +86,7 @@ public class TicTacToe {
 
     /**
      * Method placing Xs or Os in the gameboard depending on who is playing
-     * @param pos : is a number between 1 and 9 and refers to the 9 tiles of the gameBoard
+     * @param pos : is a number between 1 and 9 that refers to the 9 tiles of the gameBoard
      * @param gameBoard : reference to the gameboard in the main class
      * @param playerType : could be "human" or "cpu"
      */
