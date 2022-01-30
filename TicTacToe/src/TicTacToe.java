@@ -36,7 +36,7 @@ public class TicTacToe {
             //Checking to see if the placement entered is already taken
             boolean validPlayerMove = checkValidMove(playerPos, gameBoard);
             while(validPlayerMove == false){
-                System.out.println(">>Sorry! Placement already taken. Try again");
+                System.out.print("\n>>Sorry! Placement already taken. \n>>Enter new placement :");
                 playerPos = input.nextInt();
                 validPlayerMove = checkValidMove(playerPos, gameBoard);
             }
