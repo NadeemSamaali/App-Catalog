@@ -201,7 +201,7 @@ public class TicTacToe {
                 return "\n>>Congratulations you won!";
             } else if(cpuPositions.containsAll(l)){
                 return "\n>>You lost! Try again.";
-            } else if (playerPositions.size() + cpuPositions.size() == 9){
+            } else if (playerPositions.size() + cpuPositions.size() == 9 && !cpuPositions.containsAll(l) && !playerPositions.containsAll(l)){
                 return "\n>>Tie";
             }}
 
