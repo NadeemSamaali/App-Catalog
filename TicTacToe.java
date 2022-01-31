@@ -5,9 +5,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * This program is a simple TicTacToe game against a computer player
+ * This program is a simple TicTacToe game against a computer player that places its tiles randomly
  * @author Nadeem Imam Samaali
- * @version 1.1.1
+ * @version 1.2.0
  */
 public class TicTacToe {
 
@@ -20,6 +20,8 @@ public class TicTacToe {
     static int cpuScore = 0;
 
     static boolean gameover = false;
+    static boolean codeClosing = false;
+    static String result = "";
 
     public static void main(String[] args){
         
@@ -31,67 +33,75 @@ public class TicTacToe {
         {'-', '+', '-', '+', '-'},
         {' ', '|', ' ', '|', ' '}};
         
-        printGameboard(gameBoard);
+        //Print welcome message
+        System.out.println("===============================");
+        System.out.println("Welcome to TicTacTow. Have fun!");
+        System.out.println("===============================");
+        
 
         Scanner input = new Scanner(System.in);
 
-        while(!gameover){
+        while(!codeClosing){
+
+            while(!gameover){
     
 
-            System.out.print("\n>>Enter you placement (1-9) :");
-            int playerPos = input.nextInt();
-            
-            //Checking to see if the placement entered is already taken
-            boolean validPlayerMove = checkValidMove(playerPos, gameBoard);
-            while(validPlayerMove == false){
-                System.out.print("\n>>Sorry! Placement already taken. \n>>Enter new placement :");
-                playerPos = input.nextInt();
-                validPlayerMove = checkValidMove(playerPos, gameBoard);
+                System.out.print("\n>>Enter you placement (1-9) : ");
+                int playerPos = input.nextInt();
+                
+                //Checking to see if the placement entered is already taken
+                while(playerPositions.contains(playerPos) || cpuPositions.contains(playerPos)){
+                    System.out.print("\n>>Sorry! Placement already taken. \n>>Enter valid placement : ");
+                    playerPos = input.nextInt();
+                }
+                
+                placePiece(playerPos, gameBoard, "human");
+                result = checkWinner();
+                printGameboard(gameBoard);
+                System.out.println(result);
+    
+                if(result == " "){
+                    //Creating a random integer for the cpu's placement
+                    Random rand = new Random();
+                    int cpuPos = rand.nextInt(9) + 1;
+                    
+                    //Checking to see if the placement entered is already taken
+                    while(playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)){
+                        cpuPos = rand.nextInt(9) + 1;
+                    }
+                    
+                    System.out.println("\n>>CPU has entered placement");
+                    placePiece(cpuPos, gameBoard, "cpu");
+                    result = checkWinner();
+                    printGameboard(gameBoard);
+                    System.out.println(result);
+                }
+
+                //Recording wins into the scoreboard and printing them
+                addScore();
+
+                if(result != " "){
+                    clearPositions();
+                    gameover = true;
+                }
+    
+                //Printing the score board and ask for player to play another game + resetting the board
+                checkGameFinished(gameBoard);
+            }  
+
+            //Continuing to play or closing the code
+            String answer = input.nextLine();
+            switch(answer){
+                case "yes":
+                gameover = false;
+                break;
+                case "no":
+                System.out.println("\n>>Thank you for playing TicTacToe! See you next time :)");
+                codeClosing = true;
+                break;
             }
 
-            placePiece(playerPos, gameBoard, "human");
-
-            printGameboard(gameBoard);
-
-            //Creating a random integer for the cpu's placement
-            Random rand = new Random();
-            int cpuPos = rand.nextInt(9) + 1;
-            
-            //Checking to see if the placement entered is already taken
-            boolean validCpuMove = checkValidMove(cpuPos, gameBoard);
-            while(validCpuMove == false){
-                cpuPos = rand.nextInt(9) + 1;
-                validCpuMove = checkValidMove(cpuPos, gameBoard);
-            }
-            
-            System.out.println("\n>>CPU has entered placement");
-            placePiece(cpuPos, gameBoard, "cpu");
-
-            printGameboard(gameBoard);
-            String result = checkWinner();
-            System.out.println(result);
-
-            //Recording wins into the scoreboard and printing them
-            if(result == "\n>>Congratulations you won!")
-                humanScore += 1;
-            else if(result == "\n>>You lost! Try again.")
-                cpuScore += 1;
-            else if(result == "\n>>Tie"){
-                cpuPos += 1;
-                humanScore += 1;
-            }
-
-            //Reseting the gameboard and the player/cpu position arrays when winning or loosing
-            if(result != " "){
-                System.out.println("\n##Scoreboard --- You : " + humanScore + " ; CPU : " + cpuScore);
-                resetGameBoard(gameBoard);
-                playerPositions.clear();
-                cpuPositions.clear();
-                System.out.println("\n##The game board has been reset!");
-            }
-
-            
-        }      
+        }         
     }
 
     /**
@@ -199,66 +209,6 @@ public class TicTacToe {
     }
 
     /**
-     * Method checking if the placement inputted by the human player or the cpu is already taken or not
-     * @param pos : position of the human player / cpu
-     * @param gameBoard : reference to the gameboard in the main class
-     * @return : winning message, loosing message, tie message or nothing
-     */
-    public static boolean checkValidMove(int pos, char[][] gameBoard)
-    {
-        switch(pos){
-            case 1:
-                if(gameBoard[0][0] == ' ')
-                    return true;
-                else
-                    return false;
-            case 2:
-                if(gameBoard[0][2] == ' ')
-                    return true;
-                else
-                    return false;
-            case 3:
-                if(gameBoard[0][4] == ' ')
-                    return true;
-                else
-                    return false;
-            case 4:
-                if(gameBoard[2][0] == ' ')
-                    return true;
-                else
-                    return false;
-            case 5:
-                if(gameBoard[2][2] == ' ')
-                    return true;
-                else
-                    return false;
-            case 6:
-                if(gameBoard[2][4] == ' ')
-                    return true;
-                else
-                    return false;
-            case 7:
-                if(gameBoard[4][0] == ' ')
-                    return true;
-                else
-                    return false;
-            case 8:
-                if(gameBoard[4][2] == ' ')
-                    return true;
-                else
-                    return false;
-            case 9:
-                if(gameBoard[4][4] == ' ')
-                    return true;
-                else
-                    return false;
-            default:
-            return false;
-        }
-        
-    }
-
-    /**
      * Method resetting the gameboard
      * @param gameBoard : reference to the gameboard in the main class
      */
@@ -273,6 +223,42 @@ public class TicTacToe {
         gameBoard[4][0] = ' ';
         gameBoard[4][2] = ' ';
         gameBoard[4][4] = ' ';
+    }
+
+    /**
+     * Method printing the scorebored and asking if user wants to play again
+     * @param gameBoard : reference to the gameboard
+     */
+    public static void checkGameFinished(char[][] gameBoard)
+    {
+        if(result != " "){
+            System.out.println("\n##Scoreboard --- You : " + humanScore + " ; CPU : " + cpuScore);
+            resetGameBoard(gameBoard);
+            System.out.println("\n>>Do you want to play another game? (yes/no)");
+        }
+    }
+
+    /**
+     * Method that will give the winner(s) points based on how many rounds they've won
+     */
+    public static void addScore(){
+
+        if(result == "\n>>Congratulations you won!")
+            humanScore += 1;
+        else if(result == "\n>>You lost! Try again.")
+            cpuScore += 1;
+        else if(result == "\n>>Tie"){
+            cpuScore += 1;
+            humanScore += 1;
+        }
+    }
+
+    /**
+     * Method that will clear all the cpu and human positions that were previously on the board
+     */
+    public static void clearPositions(){
+        playerPositions.clear();
+        cpuPositions.clear();
     }
     
 }
