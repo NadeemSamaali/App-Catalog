@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * This program is a simple TicTacToe game against a computer player that places its tiles randomly
  * @author Nadeem Imam Samaali
- * @version 1.2.0
+ * @version 1.2.1
  */
 public class TicTacToe {
 
@@ -35,7 +35,7 @@ public class TicTacToe {
         
         //Print welcome message
         System.out.println("===============================");
-        System.out.println("Welcome to TicTacTow. Have fun!");
+        System.out.println("Welcome to TicTacToe. Have fun!");
         System.out.println("===============================");
         
 
