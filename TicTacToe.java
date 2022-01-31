@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * This program is a simple TicTacToe game against a computer player that places its tiles randomly
  * @author Nadeem Imam Samaali
- * @version 1.2.2
+ * @version 1.2.3
  */
 public class TicTacToe {
 
@@ -201,7 +201,7 @@ public class TicTacToe {
                 return "\n>>Congratulations you won!";
             } else if(cpuPositions.containsAll(l)){
                 return "\n>>You lost! Try again.";
-            } else if (cpuPositions.size() + cpuPositions.size() == 9){
+            } else if (playerPositions.size() + cpuPositions.size() == 9){
                 return "\n>>Tie";
             }}
 
