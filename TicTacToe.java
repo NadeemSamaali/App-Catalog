@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * This program is a simple TicTacToe game against a computer player that places its tiles randomly
  * @author Nadeem Imam Samaali
- * @version 1.2.3
+ * @version 1.2.4
  */
 public class TicTacToe {
 
