@@ -11,7 +11,7 @@ import java.util.*;
  * 1.1.2 | Program will remove extra characters from input if it exceeds the wordSequence length
  * 1.1.3 | Added more words
  * 
- * @version 1.1.2
+ * @version 1.1.3
  */
 
 public class TypeMaster {
