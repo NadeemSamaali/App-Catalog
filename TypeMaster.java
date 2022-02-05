@@ -5,7 +5,8 @@ import java.util.*;
  * TypeMaster is a program that calculates typing speed and accuracy of user.
  * 
  * 1.0.0 | First release
- * 1.1.0 | Programm can now calculate and output writing accuracy
+ * 1.1.0 | Programm can now calculate and output typing accuracy
+ * 1.1.1 | Added more words
  * @version 1.1.0
  */
 
@@ -13,11 +14,15 @@ public class TypeMaster {
     
     //Word array
     static String[] word = {"this", "orange", "without", "command",
-    "enveloppe", "insectarium", "lantern", "follow", "dinosaur",
+    "envelope", "insectarium", "lantern", "follow", "dinosaur",
     "instructor", "building", "tall", "commence", "university",
     "village", "video", "media", "throughout", "apparently", "velocity",
     "commercial", "computer", "cat", "plant", "nature", "if", "so", "very",
-    "refresh", "science", "brother", "sister", "family"};
+    "refresh", "science", "brother", "sister", "family", "know", "eat", "throw",
+    "speak", "quotient", "helicopter", "information", "sausage", "neighbour", "vehicle",
+    "shirt", "pants", "wardrobe", "go", "outside", "inside", "over", "under", "a",
+    "many", "religion", "transit", "public", "education", "forest", "color", "leaf", "rock",
+    "zebra", "yogurt", "veganism", "utopia", "Loona", "apple", "tidings", "reality"};
 
     //Word placement array
     static ArrayList<Integer> wordPlacement = new ArrayList<Integer>();
