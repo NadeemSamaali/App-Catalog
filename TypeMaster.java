@@ -7,7 +7,8 @@ import java.util.*;
  * 1.0.0 | First release
  * 1.1.0 | Programm can now calculate and output typing accuracy
  * 1.1.1 | Added more words
- * @version 1.1.0
+ * 1.1.2 | Program will remove extra characters from input if it exceeds the wordSequence length
+ * @version 1.1.2
  */
 
 public class TypeMaster {
@@ -61,8 +62,14 @@ public class TypeMaster {
         int numChar = answer.length();
         int wpm = (int)(((numChar/5) / seconds) * 60);
 
+
+        while(answer.length() > wordSequence.length()){
+            answer = answer.substring(0, (answer.length() - 1));
+        }
+
         char[] wordSequenceChar = wordSequence.toCharArray();
         char[] answerChar = answer.toCharArray();
+
 
         System.out.println("\n# # # RESULTS # # #\n|| Your speed is " + wpm + " words per minute");
         System.out.println("|| Your typing accuracy is : " + getAccuracy(wordSequenceChar, answerChar) + "%");
