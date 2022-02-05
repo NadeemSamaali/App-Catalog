@@ -2,10 +2,11 @@ import java.time.LocalTime;
 import java.util.*;
 
 /**
- * TypeMaster is a program that calculates typing speed of user.
+ * TypeMaster is a program that calculates typing speed and accuracy of user.
  * 
  * 1.0.0 | First release
- * @version 1.0.0
+ * 1.1.0 | Programm can now calculate and output writing accuracy
+ * @version 1.1.0
  */
 
 public class TypeMaster {
@@ -21,6 +22,8 @@ public class TypeMaster {
     //Word placement array
     static ArrayList<Integer> wordPlacement = new ArrayList<Integer>();
 
+    static String wordSequence = "";
+    static String answer;
 
     public static void main(String[] args){
 
@@ -38,25 +41,55 @@ public class TypeMaster {
                 wordNum = r.nextInt(word.length);
 
             wordPlacement.add(wordNum);
-            System.out.print(word[wordNum] + " ");
+            wordSequence += word[wordNum] + " ";
         }
+        wordSequence = wordSequence.substring(0, (wordSequence.length() - 1));
+        System.out.println(wordSequence);
 
         //Calculating typing speed
-        System.out.println();
         double start = LocalTime.now().toNanoOfDay();
         Scanner input = new Scanner(System.in);
-        String answer = input.nextLine();
+        answer = input.nextLine();
         double end = LocalTime.now().toNanoOfDay();
         double timeElapsed = end - start;
         double seconds = timeElapsed / 1000000000.0;
         int numChar = answer.length();
         int wpm = (int)(((numChar/5) / seconds) * 60);
-        System.out.println("\n>> Your speed is " + wpm + " words per minute");
 
-         
+        char[] wordSequenceChar = wordSequence.toCharArray();
+        char[] answerChar = answer.toCharArray();
 
+        System.out.println("\n# # # RESULTS # # #\n|| Your speed is " + wpm + " words per minute");
+        System.out.println("|| Your typing accuracy is : " + getAccuracy(wordSequenceChar, answerChar) + "%");
     }
     
-    
+    /**
+     * This method allows to calculate the typing accuracy of the users by converting the computer
+     * generated word sequence and the user input into character arrays. Then, this method will compare
+     * each caracter of the two character arrays to look for similarities and differences. For every
+     * character that is indentical, the method will record a correct character. The amount of correct
+     * characters will be compared with the total amount of characters and output an accuracy percentage
+     * 
+     * @param wordSequenceChar reference to the wordSequenceChar array in the main class
+     * @param answerChar reference to the answerChar array in the main class
+     * @return accuracy
+     * @version 1.0.0
+     */
+    public static Double getAccuracy(char[] wordSequenceChar, char[] answerChar){
+
+        double accuracy;
+
+        double correctChar = 0;
+        double totalChar = wordSequenceChar.length;
+
+        for(int j = 0; j < answerChar.length; j++){
+            if(wordSequenceChar[j] == answerChar[j])
+                correctChar++;
+        }
+
+        accuracy = (correctChar / totalChar)*100;
+
+        return accuracy;
+    }
 
 }
