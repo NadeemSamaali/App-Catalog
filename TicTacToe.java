@@ -7,7 +7,10 @@ import java.util.Scanner;
 /**
  * This program is a simple TicTacToe game against a computer player that places its tiles randomly
  * @author Nadeem Imam Samaali
- * @version 1.2.4
+ * 
+ * 1.2.5 | bug fixed : human player and CPU can now tie
+ * 1.2.6 | bug fized : human player and CPU can now win with a full board
+ * @version 1.2.6
  */
 public class TicTacToe {
 
@@ -23,7 +26,7 @@ public class TicTacToe {
     static boolean codeClosing = false;
     static String result = "";
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         
         //creating the gameboard
         char[][] gameBoard = {
@@ -48,7 +51,7 @@ public class TicTacToe {
 
                 System.out.print("\n>>Enter you placement (1-9) : ");
                 int playerPos = input.nextInt();
-                
+
                 //Checking to see if the placement entered is already taken
                 while(playerPositions.contains(playerPos) || cpuPositions.contains(playerPos)){
                     System.out.print("\n>>Sorry! Placement already taken. \n>>Enter valid placement : ");
@@ -201,8 +204,13 @@ public class TicTacToe {
                 return "\n>>Congratulations you won!";
             } else if(cpuPositions.containsAll(l)){
                 return "\n>>You lost! Try again.";
-            } else if (playerPositions.size() + cpuPositions.size() == 9 && !cpuPositions.containsAll(l) && !playerPositions.containsAll(l)){
-                return "\n>>Tie";
+            } else if (playerPositions.size() + cpuPositions.size() == 9){
+                if(playerPositions.containsAll(l))
+                    return "\n>>Congratulations you won!";
+                else if(cpuPositions.containsAll(l))
+                    return "\n>>You lost! Try again.";
+                else
+                    return "\n>>Tie.";
             }}
 
         return " ";
@@ -247,7 +255,7 @@ public class TicTacToe {
             humanScore += 1;
         else if(result == "\n>>You lost! Try again.")
             cpuScore += 1;
-        else if(result == "\n>>Tie"){
+        else if(result == "\n>>Tie."){
             cpuScore += 1;
             humanScore += 1;
         }
