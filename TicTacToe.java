@@ -9,8 +9,10 @@ import java.util.Scanner;
  * @author Nadeem Imam Samaali
  * 
  * 1.2.5 | bug fixed : human player and CPU can now tie
- * 1.2.6 | bug fized : human player and CPU can now win with a full board
- * @version 1.2.6
+ * 1.2.6 | bug fixed : human player and CPU can now win with a full board
+ * 1.2.7 | bug fixed : human player can now win with a full board no matter the winning positions
+ * 
+ * @version 1.2.7
  */
 public class TicTacToe {
 
@@ -198,22 +200,21 @@ public class TicTacToe {
         winning.add(dia1);
         winning.add(dia2);
 
+        
         //Check for winner
         for(List l : winning){
             if(playerPositions.containsAll(l)){
                 return "\n>>Congratulations you won!";
             } else if(cpuPositions.containsAll(l)){
-                return "\n>>You lost! Try again.";
-            } else if (playerPositions.size() + cpuPositions.size() == 9){
-                if(playerPositions.containsAll(l))
-                    return "\n>>Congratulations you won!";
-                else if(cpuPositions.containsAll(l))
-                    return "\n>>You lost! Try again.";
-                else
-                    return "\n>>Tie.";
+                return "\n>>You lost! Try again."; 
             }}
 
+        if (playerPositions.size() + cpuPositions.size() == 9){
+            return "\n>>Tie.";
+        }
+        
         return " ";
+        
     }
 
     /**
